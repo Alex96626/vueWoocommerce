@@ -1,0 +1,17 @@
+ .left-bar {
+    flex: 1 1 332px;
+ }
+ 
+ .form-add-product {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    gap: $indent-primary * 2;
+
+    &__button {
+      margin-top: $indent-primary;
+      
+    }
+   
+ }
