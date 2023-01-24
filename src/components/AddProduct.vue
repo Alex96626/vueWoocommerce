@@ -6,16 +6,16 @@
                 <input type="text" name="product-name"
                 placeholder="Введите наименование товара"
                 class="form__field"
-                v-model="newProduct.productName">
+                v-model="newProduct.name">
             </label>
             <label for="product-description" class="form__label">
                 <span class="form__title">Описание товара</span>
                 <textarea name="product-description"
                 placeholder="Введите описание товара"
                 class="form__field" rows="6"
-                v-model="newProduct.productDescription"> </textarea>
+                v-model="newProduct.description"> </textarea>
             </label>
-            <P>{{newProduct.productName }}</P>
+            <P>{{ newProduct.productName }}</P>
             <label for="product-image-src" class="form__label">
                 <span class="form__title">Ссылка на изображение товара</span>
                 <input type="text" name="product-image-src"
@@ -27,10 +27,10 @@
                 <input type="text" name="product-price"
                 placeholder="Введите цену"
                 class="form__field"
-                v-model="newProduct.productPrice">
+                v-model="newProduct.price">
             </label>
             <button
-            v-on:click.prevent="$emit('click', createNewProduct(newProduct))"
+            v-on:click.prevent = createNewProduct
             class="button form-add-product__button"
             >Добавить товар</button>
         </form>
@@ -43,24 +43,18 @@ export default {
   data() {
     return {
       newProduct: {
-        productName: '',
-        productDescription: '',
-        productPrice: '',
+        name: '',
+        description: '',
+        price: '',
       },
     };
   },
-  inject: ['products'],
 
   methods: {
-    createNewProduct({ productName, productDescription, productPrice }) {
-      const newProduct = {
-        name: productName,
-        description: productDescription,
-        price: productPrice,
-      };
-      this.products.push(newProduct);
-      console.log(this.products);
+    createNewProduct() {
+      this.$emit('click', this.newProduct);
     },
   },
+
 };
 </script>

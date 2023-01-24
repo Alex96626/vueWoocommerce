@@ -11,50 +11,36 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          name: 'test',
-          description: 'Прикольный товар и бла бла бла',
-          price: 10000,
-          currency: 'руб',
-        },
-        {
-          name: 'test2',
-          description: 'test-description',
-          price: 10000,
-          currency: 'руб',
-        },
-        {
-          name: 'test3',
-          description: 'test-description',
-          price: 10000,
-          currency: 'руб',
-        },
-        {
-          name: 'test4',
-          description: 'test-description',
-          price: 10000,
-          currency: 'руб',
-        },
-      ],
+      products: [],
     };
   },
 
-  provide() {
-    return {
-      products: this.products,
-    };
+  created() {
+    const productData = localStorage.getItem('products');
+    if (productData) {
+      this.products = JSON.parse(productData);
+    }
+  },
+
+  methods: {
+    showNewProduct(newProduct) {
+      console.log(newProduct);
+      this.products.push(newProduct);
+      localStorage.setItem('products', JSON.stringify(this.products));
+    },
   },
 
 };
 </script>
 <template>
   <div class="container" style="display:flex; gap:16px">
-    <AddProduct></AddProduct>
+    <AddProduct
+    @click="showNewProduct"
+    ></AddProduct>
     <div class="products">
       <Product
         v-for="product in products"
-        :key="product.name"
+        :key="products[product.length - 1]"
         v-bind:product="product"
         >
       </Product>
