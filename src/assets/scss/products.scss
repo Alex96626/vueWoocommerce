@@ -1,11 +1,23 @@
 .products {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: $indent-primary * 2;
     flex: 3 3 1028px;
-    //
-    // max-width: 1028px;
-    // margin: 0 0 0 auto;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $indent-primary * 2;
+        flex: 3 3 1028px;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
 }
 
 .product {
@@ -13,8 +25,7 @@
     flex-direction: column;
     gap: $indent-primary * 2;
     align-items: flex-start;
-    flex: 1 calc(100% / 3 - $indent-primary * 2);
-    max-width: 332px;
+    flex: 0 1 calc(100% / 3 - $indent-primary * 2);
     height: min-content;
     padding: $indent-primary * 2;
     padding-bottom: $indent-primary * 3;

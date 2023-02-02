@@ -1,0 +1,20 @@
+.pagination {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+
+        &__item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 75px;
+            background-color: burlywood;
+            border-radius: 25px;
+            font: {
+                weight: 600;
+                size: 1rem;
+            }
+            line-height: 1.25;
+            cursor: pointer;
+        }
+}

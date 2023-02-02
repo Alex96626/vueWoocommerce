@@ -1,5 +1,6 @@
 @import  "./variables.scss";
 @import "./add-product.scss";
+@import "./pagination.scss";
 @import "./products.scss";
 
 * {
@@ -83,6 +84,7 @@ body {
         weight: 600;
         size: 0.75rem;
     }
+    background: none;
     line-height: 0.9375rem;
     letter-spacing: -0.01rem;
     color: $no-active-text;

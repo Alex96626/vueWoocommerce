@@ -1,6 +1,6 @@
 <template>
     <div class="left-bar">
-        <form action="" class="form form-add-product">
+        <form action="" class="form form-add-product" id="new-product">
             <label for="product-name" class="form__label">
                 <span class="form__title">Наименование товара</span>
                 <input type="text" name="product-name"
@@ -53,6 +53,11 @@ export default {
   methods: {
     createNewProduct() {
       this.$emit('click', this.newProduct);
+      this.newProduct = {
+        name: '',
+        description: '',
+        price: '',
+      };
     },
   },
 
