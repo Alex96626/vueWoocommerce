@@ -2,7 +2,7 @@
 // @ is an alias to /src
 import AddProduct from '@/components/AddProduct.vue';
 import AddPagination from '@/components/Pagination.vue';
-import FilterElemtns from '@/components/Filter.vue';
+import Order from '@/components/Order.vue';
 import Search from '@/components/Search.vue';
 import Product from '@/components/Product.vue';
 
@@ -11,7 +11,7 @@ export default {
   components: {
     AddProduct,
     AddPagination,
-    FilterElemtns,
+    Order,
     Search,
     Product,
   },
@@ -103,25 +103,6 @@ export default {
     }
   },
 
-  methods: {
-    showNewProduct(newProduct) {
-      this.products.push(newProduct);
-      localStorage.setItem('products', JSON.stringify(this.products));
-    },
-
-    showNewPage(newCountPage) {
-      this.countPage = newCountPage;
-    },
-
-    getSearchValue(value) {
-      this.serchValue = value;
-    },
-
-    getFilterResult(name) {
-      this.filterValue = name;
-    },
-  },
-
   computed: {
     getStartCountElement() {
       return this.countPage * 6 - 6;
@@ -135,7 +116,7 @@ export default {
       return this.fitsProducts.slice(this.getStartCountElement, this.getEndCountElement);
     },
 
-    fitsProducts() {
+    filteredProducts() {
       const products = [...this.products];
       let result = products;
       if (!this.serchValue && !this.filterValue) return products;
@@ -155,6 +136,25 @@ export default {
       return result;
     },
   },
+
+  methods: {
+    showNewProduct(newProduct) {
+      this.products.push(newProduct);
+      localStorage.setItem('products', JSON.stringify(this.products));
+    },
+
+    showNewPage(newCountPage) {
+      this.countPage = newCountPage;
+    },
+
+    getSearchValue(value) {
+      this.serchValue = value;
+    },
+
+    getFilterResult(name) {
+      this.filterValue = name;
+    },
+  },
 };
 </script>
 <template>
@@ -164,13 +164,13 @@ export default {
       <div class='products__header'>
         <AddPagination
           :page='this.countPage'
-          :element='fitsProducts'
+          :element='filteredProducts'
           @click='showNewPage'>
         </AddPagination>
-        <FilterElemtns
+        <Order
           @selected="getFilterResult"
         >
-        </FilterElemtns>
+        </Order>
         <Search
           @input="getSearchValue"
         ></Search>

@@ -20,9 +20,19 @@
 <script>
 export default {
   name: 'AddPagination',
+  props: {
+    page: {
+      type: Number, // счетчик текущей страницы
+      required: true,
+    },
+    element: {
+      type: Array, // массив слайдов
+      required: true,
+    },
+  },
+
   data() {
     return {
-      firsPage: true,
     };
   },
 
@@ -38,9 +48,5 @@ export default {
     },
   },
 
-  props: {
-    page: Number, // счетчик текущей страницы
-    element: Array, // массив слайдов
-  },
 };
 </script>

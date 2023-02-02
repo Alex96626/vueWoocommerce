@@ -1,6 +1,6 @@
 <template>
-    <label for="filter">
-      <select name="filter" id="product-filter"
+    <label for="order">
+      <select name="order" id="order"
       v-model="value"
       @change="$emit('selected', value)"
       >
@@ -12,7 +12,7 @@
   </template>
 <script>
 export default {
-  name: 'FilterElemtns',
+  name: 'OrderProduct',
   data() {
     return {
       value: '',
