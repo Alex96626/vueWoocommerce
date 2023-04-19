@@ -1,3 +1,32 @@
+<template>
+  <div class='container' style='display: flex; gap: 16px'>
+    <AddProduct @click='addNewProduct'></AddProduct>
+    <div class='products'>
+      <div class='products__header'>
+        <AddPagination
+          :page='this.countPage'
+          :element='filteredProducts'
+          @click='showNewPage'>
+        </AddPagination>
+        <Order
+          @selected="getFilterResult"
+        >
+        </Order>
+        <Search
+          @input="getSearchValue"
+        ></Search>
+      </div>
+      <div class='products__list'>
+        <Product
+          v-for='(product, index) in modifyProductsList'
+          :key='index'
+          :product='product'
+        >
+        </Product>
+      </div>
+    </div>
+  </div>
+</template>
 <script>
 // @ is an alias to /src
 import AddProduct from '@/components/AddProduct.vue';
@@ -98,9 +127,8 @@ export default {
 
   created() {
     const productData = localStorage.getItem('products');
-    if (productData) {
-      this.products = JSON.parse(productData);
-    }
+    if (!productData) return;
+    this.products = JSON.parse(productData);
   },
 
   computed: {
@@ -113,7 +141,7 @@ export default {
     },
 
     modifyProductsList() {
-      return this.fitsProducts.slice(this.getStartCountElement, this.getEndCountElement);
+      return this.filteredProducts.slice(this.getStartCountElement, this.getEndCountElement);
     },
 
     filteredProducts() {
@@ -125,7 +153,7 @@ export default {
         result = result.filter((item) => item.name === this.serchValue);
       }
       if (this.filterValue) {
-        // фильтр по фильтрации
+        // фильтр по цене
         if (this.filterValue === 'max-price') {
           result = result.sort((a, b) => (a.price > b.price ? 1 : -1));
         } else {
@@ -138,7 +166,7 @@ export default {
   },
 
   methods: {
-    showNewProduct(newProduct) {
+    addNewProduct(newProduct) {
       this.products.push(newProduct);
       localStorage.setItem('products', JSON.stringify(this.products));
     },
@@ -157,32 +185,3 @@ export default {
   },
 };
 </script>
-<template>
-  <div class='container' style='display: flex; gap: 16px'>
-    <AddProduct @click='showNewProduct'></AddProduct>
-    <div class='products'>
-      <div class='products__header'>
-        <AddPagination
-          :page='this.countPage'
-          :element='filteredProducts'
-          @click='showNewPage'>
-        </AddPagination>
-        <Order
-          @selected="getFilterResult"
-        >
-        </Order>
-        <Search
-          @input="getSearchValue"
-        ></Search>
-      </div>
-      <div class='products__list'>
-        <Product
-          v-for='(product, index) in modifyProductsList'
-          :key='index'
-          :product='product'
-        >
-        </Product>
-      </div>
-    </div>
-  </div>
-</template>
